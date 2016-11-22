@@ -6,8 +6,11 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Favorite.belongsTo(models.User);
         Favorite.belongsTo(models.User, {
+          foreignKey: 'user_id'
+        });
+        Favorite.belongsTo(models.User, {
+          foreignKey: 'favorite_user_id',
           as: 'favorite_user'
         });
       }

@@ -7,11 +7,17 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Post.belongsTo(models.Thing);
-        Post.belongsToMany(models.Tag, {
-          through: models.PostTag
+        Post.belongsTo(models.Thing, {
+          foreignKey: 'thing_id'
         });
-        Post.hasMany(models.PostTag);
+        Post.belongsToMany(models.Tag, {
+          through: models.PostTag,
+          foreignKey: 'post_id',
+          otherKey: 'tag_id'
+        });
+        Post.hasMany(models.PostTag, {
+          foreignKey: 'post_id'
+        });
       }
     },
     underscored: true

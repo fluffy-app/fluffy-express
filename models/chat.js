@@ -6,8 +6,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Chat.belongsTo(models.Thing);
-        Chat.belongsTo(models.User);
+        Chat.belongsTo(models.Thing, {
+          foreignKey: 'thing_id'
+        });
+        Chat.belongsTo(models.User, {
+          foreignKey: 'user_id'
+        });
       }
     },
     underscored: true

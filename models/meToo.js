@@ -8,8 +8,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        MeToo.belongsTo(models.Thing);
-        MeToo.belongsTo(models.User);
+        MeToo.belongsTo(models.Thing, {
+          foreignKey: 'thing_id'
+        });
+        MeToo.belongsTo(models.User, {
+          foreignKey: 'user_id'
+        });
       }
     },
     underscored: true

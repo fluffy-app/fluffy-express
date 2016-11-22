@@ -11,8 +11,12 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Event.belongsTo(models.Thing);
-        Event.belongsTo(models.User);
+        Event.belongsTo(models.Thing, {
+          foreignKey: 'thing_id'
+        });
+        Event.belongsTo(models.User, {
+          foreignKey: 'user_id'
+        });
       }
     },
     underscored: true

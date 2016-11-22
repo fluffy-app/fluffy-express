@@ -11,15 +11,29 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Thing.belongsTo(models.User);
-        Thing.hasMany(models.Event);
-        Thing.hasMany(models.Chat);
-        Thing.hasMany(models.Post);
-        Thing.hasMany(models.MeToo);
-        Thing.belongsToMany(models.Tag, {
-          through: models.ThingTag
+        Thing.belongsTo(models.User, {
+          foreignKey: 'user_id'
         });
-        Thing.hasMany(models.ThingTag);
+        Thing.hasMany(models.Event, {
+          foreignKey: 'thing_id'
+        });
+        Thing.hasMany(models.Chat, {
+          foreignKey: 'thing_id'
+        });
+        Thing.hasMany(models.Post, {
+          foreignKey: 'thing_id'
+        });
+        Thing.hasMany(models.MeToo, {
+          foreignKey: 'thing_id'
+        });
+        Thing.belongsToMany(models.Tag, {
+          through: models.ThingTag,
+          foreignKey: 'thing_id',
+          otherKey: 'tag_id'
+        });
+        Thing.hasMany(models.ThingTag, {
+          foreignKey: 'thing_id'
+        });
       }
     },
     underscored: true

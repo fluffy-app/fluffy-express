@@ -5,8 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var index = require('./routes/index');
-var users = require('./routes/users');
+var flash = require('express-flash');
+var passport = require('passport');
+var expressSession = require('express-session');
+var csrf = require('csurf');
 
 var app = express();
 
@@ -22,8 +24,24 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
+app.use(flash());
+
+// csrf対策
+app.use(expressSession({secret: 'secret_key'}));
+app.use(csrf());
+app.use(function(req, res, next) {
+  var token = req.csrfToken();
+  res.locals.csrftoken = token;
+  next();
+});
+
+// 認証ミドルウェアpassportの初期化。
+// Configuring Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+require('./module/passport.js')(passport);
+require('./routes.js')(app, passport);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -34,6 +52,9 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+
+  console.log('err.message:', err.message);
+  
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

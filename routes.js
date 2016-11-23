@@ -1,7 +1,6 @@
 module.exports = function(app, passport) {
 
   app.use('/', require('./routes/index'));
-  app.use('/users', require('./routes/users'));
   app.use('/login', require('./routes/login'));
   app.use('/signup', require('./routes/signup'));
   app.use('/fluffy', require('./routes/fluffy'));
@@ -16,7 +15,7 @@ module.exports = function(app, passport) {
     successRedirect: '/fluffy',
     failureRedirect: '/login',
     failureFlash: true,
-    session: false
+    session: true
   }), function(req, res, next) {
       res.send("Login success");
   });
@@ -31,7 +30,7 @@ module.exports = function(app, passport) {
     successRedirect: '/fluffy',
     failureRedirect: '/signup',
     failureFlash: true,
-    session: false
+    session: true
   }), function(req, res, next) {
       res.send("Signup success");
   });
@@ -44,11 +43,9 @@ module.exports = function(app, passport) {
 
 };
 
-// As with any middleware it is quintessential to call next()
-// if the user is authenticated
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/');
+  res.redirect('/login');
 }

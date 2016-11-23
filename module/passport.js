@@ -6,7 +6,6 @@ var models = require('../models');
 
 module.exports = function(passport) {
 
-  // Configure Passport authenticated session persistence.
   passport.serializeUser(function(user, done) {
     done(null, user.id);
   });
@@ -18,12 +17,11 @@ module.exports = function(passport) {
       }
     })
     .then(function(user) {
-      console.log('user: ', user);
       done(null, user);
     })
     .catch(function(error) {
       console.log('Error in Saving user: ', error);
-      return done(error);
+      done(error);
     });
   });
 

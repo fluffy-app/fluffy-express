@@ -1,0 +1,71 @@
+{
+  "appenders": [
+    {
+      "type": "dateFile",
+      "filename": "./logs/access.log",
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": false,
+      "backups": 1,
+      "category": "access"
+    },
+    {
+      "type": "logLevelFilter",
+      "level": "TRACE",
+      "maxLevel": "FATAL",
+      "appender": {
+        "type": "dateFile",
+        "filename": "./logs/app.log",
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": false,
+        "backups": 1,
+        "layout": {
+          "type": "pattern",
+          "pattern": "[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%-5p] [%-6c]: %m"
+        }
+      },
+      "category": "app"
+    },
+    {
+      "type": "logLevelFilter",
+      "level": "ERROR",
+      "maxLevel": "FATAL",
+      "appender": {
+        "type": "dateFile",
+        "filename": "./logs/error.log",
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": false,
+        "backups": 1,
+        "layout": {
+          "type": "pattern",
+          "pattern": "[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%-5p] [%-6c]: %m"
+        }
+      },
+      "category": "app"
+    },
+    {
+      "type": "logLevelFilter",
+      "level": "TRACE",
+      "maxLevel": "INFO",
+      "appender": {
+        "type": "dateFile",
+        "filename": "./logs/info.log",
+        "pattern": "-yyyy-MM-dd",
+        "alwaysIncludePattern": false,
+        "backups": 1,
+        "layout": {
+          "type": "pattern",
+          "pattern": "[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%-5p] [%-6c]: %m"
+        }
+      },
+      "category": "app"
+    },
+    {
+      "type": "console"
+    }
+  ],
+  "levels": {
+    "access": "ALL",
+    "system": "ALL",
+    "app": "ALL"
+  }
+}

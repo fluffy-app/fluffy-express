@@ -35,6 +35,7 @@ module.exports = function(app, passport) {
       res.send("Signup success");
   });
 
+  // ログイン済でないと遷移できない
   app.get('/fluffy', isAuthenticated, function(req, res, next) {
     res.render('fluffy', {
       title: 'fluffy'

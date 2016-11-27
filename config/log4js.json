@@ -9,6 +9,14 @@
       "category": "access"
     },
     {
+      "type": "dateFile",
+      "filename": "./logs/sequelize.log",
+      "pattern": "-yyyy-MM-dd",
+      "alwaysIncludePattern": false,
+      "backups": 1,
+      "category": "sequelize"
+    },
+    {
       "type": "logLevelFilter",
       "level": "TRACE",
       "maxLevel": "FATAL",
@@ -65,6 +73,7 @@
   ],
   "levels": {
     "access": "ALL",
+    "sequelize": "ALL",
     "system": "ALL",
     "app": "ALL"
   }

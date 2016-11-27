@@ -7,7 +7,8 @@ module.exports = function(app, passport) {
 
   app.get('/login', function(req, res, next) {
     res.render('login', {
-      title: 'Login'
+      title: 'Login',
+      error: req.flash('error')
     });
   });
 
@@ -22,7 +23,8 @@ module.exports = function(app, passport) {
 
   app.get('/signup', function(req, res, next) {
     res.render('signup', {
-      title: 'Signup'
+      title: 'Signup',
+      error: req.flash('error')
     });
   });
 

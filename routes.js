@@ -5,6 +5,11 @@ module.exports = function(app, passport) {
   app.use('/signup', require('./routes/signup'));
   app.use('/fluffy', require('./routes/fluffy'));
 
+  app.get('/logout', function(req, res) {
+    req.logout();
+    res.redirect('/');
+  });
+
   app.get('/login', function(req, res, next) {
     res.render('login', {
       title: 'Login',

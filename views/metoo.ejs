@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p><%= error %></p>
+    <h2>一覧</h2>
+    <ul>
+    <% things.forEach(function(thing, index) { %>
+      <section class='card'>
+        <div class='card-content'>
+          <h1 class='card-title'><%= thing.title %> *<%= thing.passion %></h1>
+          <p class='card-text'><%= thing.schedule_date %></p>
+          <% if (thing.MeToos instanceof Array && thing.MeToos.length > 0) { %>
+            <% thing.MeToos.forEach(function(meToo) { %>
+            <p class='card-text'><%= meToo.passion %></p>
+            <% }) %>
+          <% } else { %>
+            <form id='form_<%= index %>' action='/metoo' method='post'>
+              <input type='hidden' name='_csrf' value='<%= csrftoken %>'>
+              <input type='hidden' name='thingId' value='<%= thing.id %>'>
+              <div>
+                  <label>Passion:</label>
+                  <input type='range' name='passion' max='5' min='1' />
+              </div>
+              <div>
+                  <input type='submit' value='Create' />
+              </div>
+            </form>
+          <% } %>
+        </div>
+      </section>
+    <% }) %>
+    </ul>
+  </body>
+</html>

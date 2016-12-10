@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p><%= error %></p>
+    <h2>一覧</h2>
+    <ul>
+    <% things.forEach(function(thing) { %>
+      <section class="card">
+        <div class="card-content">
+          <h1 class="card-title"><%= thing.title %> *<%= thing.passion %></h1>
+          <p class="card-text"><%= thing.schedule_date %></p>
+          <% if (thing.Tags instanceof Array && thing.Tags.length > 0) { %>
+            <% thing.Tags.forEach(function(tag) { %>
+            <p class='card-text'><%= tag.name %></p>
+            <% }) %>
+          <% } %>
+        </div>
+      </section>
+    <% }) %>
+    </ul>
+    <form action='/thing' method='post'>
+      <input type='hidden' name='_csrf' value='<%= csrftoken %>'>
+      <div>
+          <label>Title:</label>
+          <input type='text' name='title' />
+      </div>
+      <div>
+          <label>Passion:</label>
+          <input type='range' name='passion' max='5' min='1' />
+      </div>
+      <div>
+          <label>ScheduleDate:</label>
+          <input type='date' name='scheduleDate' />
+      </div>
+      <div>
+          <label>Tag:</label>
+          <input type='text' name='tagName' />
+      </div>
+      <div>
+          <input type='submit' value='Create' />
+      </div>
+    </form>
+  </body>
+</html>

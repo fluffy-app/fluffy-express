@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <p><%= error %></p>
+    <form action='/event' method='post'>
+      <input type='hidden' name='_csrf' value='<%= csrftoken %>'>
+      <div>
+          <label>Name:</label>
+          <input type='text' name='name'/>
+      </div>
+      <div>
+          <label>Detail:</label>
+          <input type='text' name='detail'/>
+      </div>
+      <div>
+          <label>ScheduleDate:</label>
+          <input type='date' name='scheduleDate'/>
+      </div>
+      <div>
+          <label>Place:</label>
+          <input type='text' name='place'/>
+      </div>
+      <div>
+          <input type='submit' value='Create'/>
+      </div>
+    </form>
+  </body>
+</html>

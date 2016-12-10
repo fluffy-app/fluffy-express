@@ -2,10 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var PostTag = sequelize.define('PostTag', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    }
+    //
   }, {
     classMethods: {
       associate: function(models) {

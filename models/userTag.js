@@ -2,10 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var UserTag = sequelize.define('UserTag', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    }
+    //
   }, {
     classMethods: {
       associate: function(models) {

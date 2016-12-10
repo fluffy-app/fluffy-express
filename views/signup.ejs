@@ -6,22 +6,22 @@
   </head>
   <body>
     <p><%= error %></p>
-    <form action="/signup" method="post">
-      <input type="hidden" name="_csrf" value="<%= csrftoken %>">
+    <form action='/signup' method='post'>
+      <input type='hidden' name='_csrf' value='<%= csrftoken %>'>
       <div>
           <label>Username:</label>
-          <input type="text" name="username"/>
+          <input type='text' name='username'/>
       </div>
       <div>
           <label>Email:</label>
-          <input type="text" name="email"/>
+          <input type='text' name='email'/>
       </div>
       <div>
           <label>Password:</label>
-          <input type="password" name="password"/>
+          <input type='password' name='password'/>
       </div>
       <div>
-          <input type="submit" value="Signup"/>
+          <input type='submit' value='Signup'/>
       </div>
     </form>
   </body>

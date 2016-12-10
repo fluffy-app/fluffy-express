@@ -4,8 +4,13 @@ module.exports = function(app, passport) {
   app.use('/login', require('./routes/login'));
   app.use('/signup', require('./routes/signup'));
   app.use('/fluffy', require('./routes/fluffy'));
+  // app.use('/event', require('./routes/event'));
+  // app.use('/thing', require('./routes/thing'));
+  var event = require('./routes/event')(app);
+  var thing = require('./routes/thing');
+  var metoo = require('./routes/metoo');
 
-  app.get('/logout', function(req, res) {
+  app.get('/logout', isAuthenticated, function(req, res) {
     req.logout();
     res.redirect('/');
   });
@@ -48,6 +53,15 @@ module.exports = function(app, passport) {
       title: 'fluffy'
     });
   });
+
+  app.get('/thing', isAuthenticated, thing.get('/thing'));
+  app.post('/thing', isAuthenticated, thing.post('/thing'));
+
+  app.get('/metoo', isAuthenticated, metoo.get('/metoo'));
+  app.post('/metoo', isAuthenticated, metoo.post('/metoo'));
+
+  // app.get('/event', isAuthenticated, event.get('/event'));
+  // app.post('/event', isAuthenticated, event.post('/event'));
 
 };
 

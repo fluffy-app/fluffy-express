@@ -2,10 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
   var ThingTag = sequelize.define('ThingTag', {
-    id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true
-    }
+    //
   }, {
     classMethods: {
       associate: function(models) {
